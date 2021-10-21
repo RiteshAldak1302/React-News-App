@@ -8,17 +8,46 @@ export class News extends Component {
         console.log("I am a constructor from News Component");
         this.state = {
             articles: [],
-            loading: false
+            loading: false,
+            page:1   
         }
     }
 
     async componentDidMount(){
-        let url="https://newsapi.org/v2/top-headlines?country=in&apiKey=bdc6d83627ad44498f825a1390b5e5e2"
+        let url="https://newsapi.org/v2/top-headlines?country=in&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=1&pageSize=21"
+        this.setState({loading:true})
         let data = await fetch(url);
         let parserData = await data.json();
-        this.setState({articles : parserData.articles})
+        this.setState({articles : parserData.articles ,
+            totalResults : parserData.totalResults 
+                       }) 
+    }
+    
+     handlePreviousClick = async () =>{
+        let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=${this.state.page-1}&pageSize=21`
+        let data = await fetch(url);
+        let parserData = await data.json();
+        this.setState({page:this.state.page -1,
+            articles : parserData.articles
+           });
     }
 
+     handleNextClick= async () =>{
+         if(this.state.page + 1 > Math.ceil(this.state.totalResults/21)){
+
+         }
+         else  {
+             let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=${this.state.page + 1}&pageSize=21`;
+                let data = await fetch(url);
+                let parserData = await data.json();
+                this.setState({page:this.state.page +1,
+                            articles : parserData.articles
+                            });
+                    }
+                }
+
+
+                
     render() {
         return (
             <div className="container my-1" >
@@ -34,8 +63,8 @@ export class News extends Component {
                     </div>
                           <hr />
                           <div className="container d-flex justify-content-between my-5">
-                          <button type="button" className="btn btn-secondary">&#8592;Previous</button>
-                          <button type="button" className="btn btn-secondary">Next&#8594;</button>
+                          <button  disabled={this.state.page<=1} type="button"  className="btn btn-secondary" onClick={this.handlePreviousClick} >&#8592;Previous</button>
+                          <button type="button" className="btn btn-secondary" onClick={this.handleNextClick} >Next&#8594;</button>
                           </div>
                     </div>
                 )
