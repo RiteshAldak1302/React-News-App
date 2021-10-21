@@ -5,7 +5,7 @@ export class Navbar extends Component {
     render() {
         return (
             <>
-               <nav className="navbar navbar-expand-lg navbar-light bg-secondary sticky-top">
+               <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
   <div className="container-fluid">
     <a className="navbar-brand" href="/" style={{color:"#e60000" , fontSize:"25px"}}  > <strong>NewsHub</strong> </a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@ export class Navbar extends Component {
       </ul>
       <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-dark" type="submit">Search</button>
+        <button className="btn btn-outline-light" type="submit">Search</button>
       </form>
     </div>
   </div>
