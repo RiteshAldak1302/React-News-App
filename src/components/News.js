@@ -42,7 +42,7 @@ export class News extends Component {
 
          }
          else  {
-             let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+             let url=`https://newsapi.org/v2/top-headlines?country=${this.props.Country}&catega&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
              this.setState({loading:true});
                 let data = await fetch(url);
                 let parserData = await data.json();
