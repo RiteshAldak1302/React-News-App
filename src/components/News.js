@@ -18,7 +18,6 @@ export class News extends Component {
     }
 
     
-   
     constructor() {
         super();
         console.log("I am a constructor from News Component");
@@ -78,10 +77,12 @@ export class News extends Component {
                 {this.state.loading && <Spinner/>}
                 <div className="row my-2">
                     
-                    {!this.state.loading && this.state.articles.map( (element) => {
-
-                 return <div className="col-md-4 my-3" key={element.url}>
-                            <NewsItem title={element.title?element.title.slice(0,45):""} description={element.description?element.description.slice(0,88):""} imgUrl={element.urlToImage} newsUrl={element.url} /> 
+                    {!this.state.loading && this.state.articles.map( (articles) => {
+                               let a = articles.publishedAt ;
+                               let d = new Date(a);
+                 return <div className="col-md-4 my-3" key={articles.url}>
+                            <NewsItem title={articles.title?articles.title.slice(0,45):""} description={articles.description?articles.description.slice(0,88):""} imgUrl={articles.urlToImage} newsUrl={articles.url} author={articles.author}
+                            date={d.toGMTString()} source={articles.source.name} /> 
                         </div>
                     }) 
                     }
