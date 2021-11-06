@@ -29,7 +29,7 @@ export class News extends Component {
     }
 
     async componentDidMount(){
-        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=1&pageSize=${this.props.pageSize}`
+        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`
         this.setState({loading:true})
         let data = await fetch(url);
         let parserData = await data.json();
@@ -40,7 +40,7 @@ export class News extends Component {
     }
     
      handlePreviousClick = async () =>{
-        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
+        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
         this.setState({loading:true});
         let data = await fetch(url);
         let parserData = await data.json();
@@ -56,7 +56,7 @@ export class News extends Component {
 
          }
          else  {
-             let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=bdc6d83627ad44498f825a1390b5e5e2&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+             let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
              this.setState({loading:true});
                 let data = await fetch(url);
                 let parserData = await data.json();
@@ -81,7 +81,7 @@ export class News extends Component {
                                let a = articles.publishedAt ;
                                let d = new Date(a);
                  return <div className="col-md-4 my-3" key={articles.url}>
-                            <NewsItem title={articles.title?articles.title.slice(0,45):""} description={articles.description?articles.description.slice(0,88):""} imgUrl={articles.urlToImage} newsUrl={articles.url} author={articles.author}
+                            <NewsItem title={articles.title?articles.title.slice(0,45):""} key={articles.id} description={articles.description?articles.description.slice(0,88):""} imgUrl={articles.urlToImage} newsUrl={articles.url} author={articles.author}
                             date={d.toGMTString()} source={articles.source.name} /> 
                         </div>
                     }) 
